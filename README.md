@@ -1,69 +1,48 @@
-# React + TypeScript + Vite
+# React ilə Softphone UI Simulyasiyası
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bu layihə, frontend proqramçı üçün verilmiş kodlaşdırma tapşırığı əsasında yaradılmışdır. Tətbiq, WebRTC API-lərindən istifadə edərək sadə bir softphone interfeysini simulyasiya edir.
 
-Currently, two official plugins are available:
+## Əsas Xüsusiyyətlər
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ✅ **Mikrofon Girişi:** `getUserMedia` API-si ilə istifadəçinin mikrofonuna təhlükəsiz giriş.
+- ✅ **Zəng İdarəetməsi:** Zəngi başlatmaq, səssizə almaq/səsliyə almaq və sonlandırmaq üçün funksional düymələr.
+- ✅ **Dinamik Status:** Zəngin hazırkı vəziyyətinin (gözləyir, bağlanır, davam edir, sonlandı) göstərilməsi.
+- ✅ **Real-vaxt Taymeri:** Zəng müddətinin `mm:ss` formatında canlı göstərilməsi.
+- ✅ **Responsiv Dizayn:** Bütün düymələr və elementlər mobil və desktop ekranlar üçün tam responsivdir.
+- ✅ **Brauzer Loqları:** Media axını ilə bağlı bütün əsas hadisələr brauzerin konsolunda qeyd olunur.
 
-## Expanding the ESLint configuration
+## İstifadə Olunan Texnologiyalar
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 19:** Müasir UI kitabxanası.
+- **Vite:** Sürətli development və build aləti.
+- **TypeScript:** Koda tip təhlükəsizliyi əlavə edir.
+- **Tailwind CSS:** Utility-first CSS framevorku.
+- **WebRTC (getUserMedia):** Brauzerlərin daxili media API-si.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Layihəni Necə İşə Salmalı?
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Layihəni lokal kompüterinizdə yoxlamaq üçün aşağıdakı addımları izləyin:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1.  **Repozitoriyanı klonlayın:**
+    ```
+    git clone https://github.com/OrkhanNajaf1i/react-softphone-task.git
+    ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2.  **Proyekt qovluğuna daxil olun:**
+    ```
+    cd react-softphone-task
+    ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3.  **Lazımi paketləri quraşdırın:**
+    ```
+    npm install
+    ```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+4.  **Development server-i işə salın:**
+    ```
+    npm run dev
+    ```
+
+5.  **Brauzerdə açın:**
+    Terminalda göstərilən linkə (adətən `http://localhost:5173`) daxil olaraq tətbiqi istifadə edə bilərsiniz.
+
