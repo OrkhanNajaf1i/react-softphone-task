@@ -16,20 +16,14 @@ const Softphone = ({ ref }: { ref?: React.RefObject<HTMLDivElement> }) => {
   });
 
   const audioRef = useRef<HTMLAudioElement>(null);
-  // const timerRef = useRef<NodeJS.Timeout | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const startCall = async () => {
     try {
       setCallState((prev: CallState) => ({ ...prev, status: "connecting" }));
-      console.log("Zəng başlanır, mikrofondan icazə istənir...");
-
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
       });
-
-      console.log("MediaStream əldə edildi:", stream);
-
       const audioTrack = stream.getAudioTracks()[0];
 
       setMediaState({
@@ -49,8 +43,6 @@ const Softphone = ({ ref }: { ref?: React.RefObject<HTMLDivElement> }) => {
         duration: 0,
         isMuted: false,
       }));
-
-      console.log("Zəng başladı, audio stream aktiv");
     } catch (error) {
       console.error("Mikrofondan icazə alınmadı:", error);
       setCallState((prev: CallState) => ({ ...prev, status: "idle" }));
@@ -68,9 +60,7 @@ const Softphone = ({ ref }: { ref?: React.RefObject<HTMLDivElement> }) => {
         isMuted: newMutedState,
       }));
 
-      console.log(
-        `Audio ${newMutedState ? "səssizə alındı" : "səsliyə alındı"}`
-      );
+      console.log(`Audio ${newMutedState ? "sessiz edildi" : "sesli..."}`);
     }
   };
 
@@ -78,7 +68,6 @@ const Softphone = ({ ref }: { ref?: React.RefObject<HTMLDivElement> }) => {
     if (mediaState.stream) {
       mediaState.stream.getTracks().forEach((track) => {
         track.stop();
-        console.log("Audio track dayandırıldı");
       });
     }
 
