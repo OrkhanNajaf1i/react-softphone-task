@@ -140,7 +140,7 @@ const Softphone = ({ ref }: { ref?: React.RefObject<HTMLDivElement> }) => {
   return (
     <div
       ref={ref}
-      className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg border"
+      className="max-w-fit mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg border"
     >
       <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
         Softphone UI
@@ -186,47 +186,48 @@ const Softphone = ({ ref }: { ref?: React.RefObject<HTMLDivElement> }) => {
 
       <audio ref={audioRef} className="hidden" muted={true} />
 
-      <div className="flex justify-center gap-3 flex-wrap">
+      <div className="flex w-full max-w-fit mx-auto flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-3">
         <button
           onClick={startCall}
           disabled={callState.isActive || callState.status === "connecting"}
-          className="px-4 py-1 rounded-lg font-medium transition-colors duration-200 
-                   bg-green-500 hover:bg-green-600 text-white
-                   disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="h-12 px-6 font-semibold rounded-lg bg-green-500 text-white transition-all duration-200 
+               hover:bg-green-600 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center min-w-[160px]"
         >
-          {callState.status === "connecting" ? "Bağlanır..." : "Zəngi Başlat"}
+          <span className="inline-block w-28 text-center">
+            {callState.status === "connecting" ? "Bağlanır..." : "Zəngi Başlat"}
+          </span>
         </button>
+
         <button
           onClick={toggleMute}
           disabled={!callState.isActive}
-          className="px-4 py-2 rounded-lg font-medium transition-colors duration-200
-                   bg-yellow-500 hover:bg-yellow-600 text-white
-                   disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="h-12 px-6 font-semibold rounded-lg bg-yellow-500 text-white transition-all duration-200 
+               hover:bg-yellow-600 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center min-w-[160px]"
         >
-          {callState.isMuted ? "Səsliyə Al" : "Səssizə Al"}
+          <span className="inline-block w-28 text-center">
+            {callState.isMuted ? "Səsliyə Al" : "Səssizə Al"}
+          </span>
         </button>
+
         <button
           onClick={endCall}
           disabled={!callState.isActive}
-          className="px-4 py-2 rounded-lg font-medium transition-colors duration-200
-                   bg-red-500 hover:bg-red-600 text-white
-                   disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="h-12 px-6 font-semibold rounded-lg bg-red-500 text-white transition-all duration-200 
+               hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center min-w-[160px]"
         >
-          Zəngi sonlandır
+          <span className="inline-block w-28 text-center">Zəngi Sonlandır</span>
         </button>
       </div>
 
-      {import.meta.env.DEV && (
-        <div className="mt-6 p-3 bg-gray-100 rounded text-sm text-gray-700">
-          <strong>Debug melumatları:</strong>
-          <br />
-          Stream Active: {mediaState.stream ? "Yes" : "No"}
-          <br />
-          Audio Track: {mediaState.audioTrack ? "Available" : "None"}
-          <br />
-          Call Status: {callState.status}
-        </div>
-      )}
+      <div className="mt-6 p-3 bg-gray-100 rounded text-sm text-gray-700">
+        <strong>Debug melumatları:</strong>
+        <br />
+        Stream Active: {mediaState.stream ? "Yes" : "No"}
+        <br />
+        Audio Track: {mediaState.audioTrack ? "Available" : "None"}
+        <br />
+        Call Status: {callState.status}
+      </div>
     </div>
   );
 };
