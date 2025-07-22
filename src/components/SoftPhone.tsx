@@ -21,9 +21,14 @@ const Softphone = ({ ref }: { ref?: React.RefObject<HTMLDivElement> }) => {
   const startCall = async () => {
     try {
       setCallState((prev: CallState) => ({ ...prev, status: "connecting" }));
+      console.log("Zəng başlanır, mikrofondan icazə istənir...");
+
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
       });
+
+      console.log("MediaStream əldə edildi:", stream);
+
       const audioTrack = stream.getAudioTracks()[0];
 
       setMediaState({
@@ -43,6 +48,8 @@ const Softphone = ({ ref }: { ref?: React.RefObject<HTMLDivElement> }) => {
         duration: 0,
         isMuted: false,
       }));
+
+      console.log("Zəng başladı, audio stream aktiv");
     } catch (error) {
       console.error("Mikrofondan icazə alınmadı:", error);
       setCallState((prev: CallState) => ({ ...prev, status: "idle" }));
@@ -60,7 +67,9 @@ const Softphone = ({ ref }: { ref?: React.RefObject<HTMLDivElement> }) => {
         isMuted: newMutedState,
       }));
 
-      console.log(`Audio ${newMutedState ? "sessiz edildi" : "sesli..."}`);
+      console.log(
+        `Audio ${newMutedState ? "səssizə alındı" : "səsliyə alındı"}`
+      );
     }
   };
 
@@ -68,6 +77,7 @@ const Softphone = ({ ref }: { ref?: React.RefObject<HTMLDivElement> }) => {
     if (mediaState.stream) {
       mediaState.stream.getTracks().forEach((track) => {
         track.stop();
+        console.log("Audio track dayandırıldı");
       });
     }
 
@@ -205,6 +215,18 @@ const Softphone = ({ ref }: { ref?: React.RefObject<HTMLDivElement> }) => {
           Zəngi sonlandır
         </button>
       </div>
+
+      {import.meta.env.DEV && (
+        <div className="mt-6 p-3 bg-gray-100 rounded text-sm text-gray-700">
+          <strong>Debug melumatları:</strong>
+          <br />
+          Stream Active: {mediaState.stream ? "Yes" : "No"}
+          <br />
+          Audio Track: {mediaState.audioTrack ? "Available" : "None"}
+          <br />
+          Call Status: {callState.status}
+        </div>
+      )}
     </div>
   );
 };
