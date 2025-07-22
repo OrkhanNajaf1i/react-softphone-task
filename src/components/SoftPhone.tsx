@@ -193,7 +193,7 @@ const Softphone = ({ ref }: { ref?: React.RefObject<HTMLDivElement> }) => {
           className="h-12 px-6 font-semibold rounded-lg bg-green-500 text-white transition-all duration-200 
                hover:bg-green-600 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center min-w-[160px]"
         >
-          <span className="inline-block w-28 text-center">
+          <span className="inline-block w-full text-center">
             {callState.status === "connecting" ? "Bağlanır..." : "Zəngi Başlat"}
           </span>
         </button>
@@ -204,7 +204,7 @@ const Softphone = ({ ref }: { ref?: React.RefObject<HTMLDivElement> }) => {
           className="h-12 px-6 font-semibold rounded-lg bg-yellow-500 text-white transition-all duration-200 
                hover:bg-yellow-600 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center min-w-[160px]"
         >
-          <span className="inline-block w-28 text-center">
+          <span className="inline-block w-full text-center">
             {callState.isMuted ? "Səsliyə Al" : "Səssizə Al"}
           </span>
         </button>
@@ -215,7 +215,9 @@ const Softphone = ({ ref }: { ref?: React.RefObject<HTMLDivElement> }) => {
           className="h-12 px-6 font-semibold rounded-lg bg-red-500 text-white transition-all duration-200 
                hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center min-w-[160px]"
         >
-          <span className="inline-block w-28 text-center">Zəngi Sonlandır</span>
+          <span className="inline-block w-full text-center">
+            Zəngi Sonlandır
+          </span>
         </button>
       </div>
 
